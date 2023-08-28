@@ -3,10 +3,22 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    "ruby.useLanguageServer": true,
     "ruby.lint": {
-      "rubocop": true,
-    },
+        "rubocop": {
+          "command": "rubocop",  // setting this will override automatic detection
+          "useBundler": true,
+          "lint": true, // enable lint cops
+          "only": ["array", "of", "cops", "to", "run"],
+          "except": ["array", "of", "cops", "not", "to", "run"],
+          "require": ["array", "of", "ruby", "files", "to", "require"],
+          "rails": true, // requires rubocop-rails gem for RuboCop >= 0.72.0
+          "standard": true,
+          "forceExclusion": true // for ignoring the excluded files from rubocop.yml
+        }
+      },
     "configurations": [
+
         {
             "type": "rdbg",
             "name": "Debug current file with rdbg",
