@@ -1,1 +1,1 @@
-Create Tic Tac Toe game in CLI using Ruby and OOP. Two players can play against each other and the board is displayed in between turns.
+Create Tic Tac Toe game in CLI using Ruby and OOP. Two players can play against each other and the @board is displayed in between turns.
