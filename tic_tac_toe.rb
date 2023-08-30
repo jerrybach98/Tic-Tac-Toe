@@ -140,12 +140,12 @@ class TicTacToe
       return @winner = true if @board[0][0] == 'O'
     end 
     if @board[0][1] == @board[2][1] && @board[2][1] == @board[4][1]
-      return @winner = true if @board[0][0] == 'X'
-      return @winner = true if @board[0][0] == 'O'
+      return @winner = true if @board[0][1] == 'X'
+      return @winner = true if @board[0][1] == 'O'
     end 
     if @board[0][2] == @board[2][2] && @board[2][2] == @board[4][2]
-      return @winner = true if @board[0][0] == 'X'
-      return @winner = true if @board[0][0] == 'O'
+      return @winner = true if @board[0][2] == 'X'
+      return @winner = true if @board[0][2] == 'O'
     end 
 
     #diagonal
@@ -154,11 +154,10 @@ class TicTacToe
       return @winner = true if @board[0][0] == 'O'
     end 
     if @board[0][2] == @board[2][1] && @board[2][1] == @board[4][0]
-      return @winner = true if @board[0][0] == 'X'
-      return @winner = true if @board[0][0] == 'O'
+      return @winner = true if @board[0][2] == 'X'
+      return @winner = true if @board[0][2] == 'O'
     end 
   end
-
   def draw?
     @board.all? do |rows|
       rows.all? {|i| i == "X" || i == "O" || i =="----------"}
