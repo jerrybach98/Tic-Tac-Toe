@@ -1,17 +1,12 @@
-# class is an relationship, has-a relationship for module
-
-# shorten methods
-# object orient the code, private, etc
-# Style guide
-# end
-
-# Player CLass
 class TicTacToe
   def initialize
+    # Get player names
     puts 'Player 1 what is your name?'
     @player1 = gets.chomp
     puts 'Player 2 what is your name?'
     @player2 = gets.chomp
+
+    # Initialize game variables
     @winner = false
     @draw = false
     @invalid_input = false
@@ -29,19 +24,20 @@ class TicTacToe
   end
 
   def play
-    display_board()
+    # Player 1 game logic: displays board, handles incorrect input, and winning/draw conditions
+    display_board
 
     loop do
       p "Player 1: #{@player1}, where do you want to put your marker? (Enter a number)"
 
       loop do
         @invalid_input = false
-        player_1_marker()
-        break unless @invalid_input == "Position not available, please place your marker"
+        player_1_marker
+        break unless @invalid_input == 'Position not available, please place your marker'
       end
 
-      check_winner()
-      display_board()
+      check_winner
+      display_board
 
       if @winner == true
         puts "Congratulations #{@player1} won!"
@@ -49,20 +45,21 @@ class TicTacToe
       end
 
       if draw?
-        puts "It a draw!"
+        puts 'It a draw!'
         return
       end
 
+      # Player 2 game logic
       p "Player 2: #{@player2}, where do you want to put your marker? (Enter a number)"
 
       loop do
         @invalid_input = false
-        player_2_marker()
-        break unless @invalid_input == "Position not available, please place your marker"
+        player_2_marker
+        break unless @invalid_input == 'Position not available, please place your marker'
       end
 
-      check_winner()
-      display_board()
+      check_winner
+      display_board
 
       if @winner == true
         puts "Congratulations #{@player2} won!"
@@ -71,6 +68,7 @@ class TicTacToe
     end
   end
 
+  private
 
   def display_board
     @board.each do |row|
@@ -78,7 +76,7 @@ class TicTacToe
     end
   end
 
-
+  # Player 1 marker placement
   def player_1_marker
     input = gets.chomp.to_i
     if input == 1 && @board[0][0] == '1'
@@ -99,14 +97,16 @@ class TicTacToe
       @board[4][1] = 'X'
     elsif input == 9 && @board[4][2] == '9'
       @board[4][2] = 'X'
-    else puts @invalid_input = "Position not available, please place your marker"
+    else
+      puts @invalid_input = 'Position not available, please place your marker'
     end
-  end 
+  end
 
+  # Player 2 marker placement
   def player_2_marker
     input = gets.chomp.to_i
     if input == 1 && @board[0][0] == '1'
-      @board[0][0] = 'O' 
+      @board[0][0] = 'O'
     elsif input == 2 && @board[0][1] == '2'
       @board[0][1] = 'O'
     elsif input == 3 && @board[0][2] == '3'
@@ -123,47 +123,48 @@ class TicTacToe
       @board[4][1] = 'O'
     elsif input == 9 && @board[4][2] == '9'
       @board[4][2] = 'O'
-    else puts @invalid_input = "Position not available, please place your marker"
+    else
+      puts @invalid_input = 'Position not available, please place your marker'
     end
   end
 
   def check_winner
     # Across
     @board.any? do |row|
-      return @winner = true if row.all? {|value| value == 'X'}
-      return @winner = true if row.all? {|value| value == 'O'}
+      return @winner = true if row.all? { |value| value == 'X' }
+      return @winner = true if row.all? { |value| value == 'O' }
     end
 
-    #Columns
+    # Columns
     if @board[0][0] == @board[2][0] && @board[2][0] == @board[4][0]
       return @winner = true if @board[0][0] == 'X'
       return @winner = true if @board[0][0] == 'O'
-    end 
+    end
     if @board[0][1] == @board[2][1] && @board[2][1] == @board[4][1]
       return @winner = true if @board[0][1] == 'X'
       return @winner = true if @board[0][1] == 'O'
-    end 
+    end
     if @board[0][2] == @board[2][2] && @board[2][2] == @board[4][2]
       return @winner = true if @board[0][2] == 'X'
       return @winner = true if @board[0][2] == 'O'
-    end 
+    end
 
-    #diagonal
+    # Diagonal
     if @board[0][0] == @board[2][1] && @board[2][1] == @board[4][2]
       return @winner = true if @board[0][0] == 'X'
       return @winner = true if @board[0][0] == 'O'
-    end 
-    if @board[0][2] == @board[2][1] && @board[2][1] == @board[4][0]
-      return @winner = true if @board[0][2] == 'X'
-      return @winner = true if @board[0][2] == 'O'
-    end 
-  end
-  def draw?
-    @board.all? do |rows|
-      rows.all? {|i| i == "X" || i == "O" || i =="----------"}
     end
+    return unless @board[0][2] == @board[2][1] && @board[2][1] == @board[4][0]
+    return @winner = true if @board[0][2] == 'X'
+
+    @winner = true if @board[0][2] == 'O'
   end
 
+  def draw?
+    @board.all? do |rows|
+      rows.all? { |i| ['X', 'O', '----------'].include?(i) }
+    end
+  end
 end
 
 puts TicTacToe.welcome_message
