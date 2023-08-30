@@ -1,7 +1,9 @@
 # class is an relationship, has-a relationship for module
 
 # check for win or draw
-# loop do
+#
+# shorten methods
+# object orient the code, private, etc
 # end
 
 # Player CLass
@@ -12,6 +14,7 @@ class TicTacToe
     puts 'Player 2 what is your name?'
     @player2 = gets.chomp
     @winner = false
+    @invalid_input = false
     @board = [
       ['1', '2', '3'],
       ['----------'],
@@ -30,52 +33,28 @@ class TicTacToe
 
     loop do
       p "Player 1 - #{@player1}: Where do you want to put your marker? (Enter a number)"
-      input = gets.chomp.to_i
-      if input == 1 && @board[0][0] == '1'
-        @board[0][0] = 'X'
-      elsif input == 2 && @board[0][1] == '2'
-        @board[0][1] = 'X'
-      elsif input == 3 && @board[0][2] == '3'
-        @board[0][2] = 'X'
-      elsif input == 4 && @board[2][0] == '4'
-        @board[2][0] = 'X'
-      elsif input == 5 && @board[2][1] == '5'
-        @board[2][1] = 'X'
-      elsif input == 6 && @board[2][2] == '6'
-        @board[2][2] = 'X'
-      elsif input == 7 && @board[4][0] == '7'
-        @board[4][0] = 'X'
-      elsif input == 8 && @board[4][1] == '8'
-        @board[4][1] = 'X'
-      elsif input == 9 && @board[4][2] == '9'
-        @board[4][2] = 'X'
-      else puts "Invalid input"
+
+      
+      loop do
+      @invalid_input = false
+      player_1_marker()
+      break unless @invalid_input == "Position not available, please put your marker somewhere else"
       end
+      check_winner()
+
+      break if @winner == true
+
       display_board()
 
       p "Player 2 - #{@player2}: Where do you want to put your marker? (Enter a number)"
-      input = gets.chomp.to_i
-      if input == 1 && @board[0][0] == '1'
-        @board[0][0] = 'O' 
-      elsif input == 2 && @board[0][1] == '2'
-        @board[0][1] = 'O'
-      elsif input == 3 && @board[0][2] == '3'
-        @board[0][2] = 'O'
-      elsif input == 4 && @board[2][0] == '4'
-        @board[2][0] = 'O'
-      elsif input == 5 && @board[2][1] == '5'
-        @board[2][1] = 'O'
-      elsif input == 6 && @board[2][2] == '6'
-        @board[2][2] = 'O'
-      elsif input == 7 && @board[4][0] == '7'
-        @board[4][0] = 'O'
-      elsif input == 8 && @board[4][1] == '8'
-        @board[4][1] = 'O'
-      elsif input == 9 && @board[4][2] == '9'
-        @board[4][2] = 'O'
-      end
+
+      loop do
+        @invalid_input = false
+        player_2_marker()
+        break unless @invalid_input == "Position not available, please put your marker somewhere else"
+        end
+
       display_board()
-      check_winner()
 
       break if @winner == true
 
@@ -86,6 +65,55 @@ class TicTacToe
   def display_board
     @board.each do |row|
       puts row.join(' | ')
+    end
+  end
+
+
+  def player_1_marker
+    input = gets.chomp.to_i
+    if input == 1 && @board[0][0] == '1'
+      @board[0][0] = 'X'
+    elsif input == 2 && @board[0][1] == '2'
+      @board[0][1] = 'X'
+    elsif input == 3 && @board[0][2] == '3'
+      @board[0][2] = 'X'
+    elsif input == 4 && @board[2][0] == '4'
+      @board[2][0] = 'X'
+    elsif input == 5 && @board[2][1] == '5'
+      @board[2][1] = 'X'
+    elsif input == 6 && @board[2][2] == '6'
+      @board[2][2] = 'X'
+    elsif input == 7 && @board[4][0] == '7'
+      @board[4][0] = 'X'
+    elsif input == 8 && @board[4][1] == '8'
+      @board[4][1] = 'X'
+    elsif input == 9 && @board[4][2] == '9'
+      @board[4][2] = 'X'
+    else puts @invalid_input = "Position not available, please put your marker somewhere else"
+    end
+  end 
+
+  def player_2_marker
+    input = gets.chomp.to_i
+    if input == 1 && @board[0][0] == '1'
+      @board[0][0] = 'O' 
+    elsif input == 2 && @board[0][1] == '2'
+      @board[0][1] = 'O'
+    elsif input == 3 && @board[0][2] == '3'
+      @board[0][2] = 'O'
+    elsif input == 4 && @board[2][0] == '4'
+      @board[2][0] = 'O'
+    elsif input == 5 && @board[2][1] == '5'
+      @board[2][1] = 'O'
+    elsif input == 6 && @board[2][2] == '6'
+      @board[2][2] = 'O'
+    elsif input == 7 && @board[4][0] == '7'
+      @board[4][0] = 'O'
+    elsif input == 8 && @board[4][1] == '8'
+      @board[4][1] = 'O'
+    elsif input == 9 && @board[4][2] == '9'
+      @board[4][2] = 'O'
+    else puts @invalid_input = "Position not available, please put your marker somewhere else"
     end
   end
 
