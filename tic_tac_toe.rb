@@ -1,9 +1,8 @@
 # class is an relationship, has-a relationship for module
 
-# check for win or draw
-#
 # shorten methods
 # object orient the code, private, etc
+# Style guide
 # end
 
 # Player CLass
@@ -14,6 +13,7 @@ class TicTacToe
     puts 'Player 2 what is your name?'
     @player2 = gets.chomp
     @winner = false
+    @draw = false
     @invalid_input = false
     @board = [
       ['1', '2', '3'],
@@ -32,32 +32,42 @@ class TicTacToe
     display_board()
 
     loop do
-      p "Player 1 - #{@player1}: Where do you want to put your marker? (Enter a number)"
+      p "Player 1: #{@player1}, where do you want to put your marker? (Enter a number)"
 
-      
       loop do
-      @invalid_input = false
-      player_1_marker()
-      break unless @invalid_input == "Position not available, please put your marker somewhere else"
+        @invalid_input = false
+        player_1_marker()
+        break unless @invalid_input == "Position not available, please place your marker"
       end
+
       check_winner()
-
-      break if @winner == true
-
       display_board()
 
-      p "Player 2 - #{@player2}: Where do you want to put your marker? (Enter a number)"
+      if @winner == true
+        puts "Congratulations #{@player1} won!"
+        return
+      end
+
+      if draw?
+        puts "It a draw!"
+        return
+      end
+
+      p "Player 2: #{@player2}, where do you want to put your marker? (Enter a number)"
 
       loop do
         @invalid_input = false
         player_2_marker()
-        break unless @invalid_input == "Position not available, please put your marker somewhere else"
-        end
+        break unless @invalid_input == "Position not available, please place your marker"
+      end
 
+      check_winner()
       display_board()
 
-      break if @winner == true
-
+      if @winner == true
+        puts "Congratulations #{@player2} won!"
+        return
+      end
     end
   end
 
@@ -89,7 +99,7 @@ class TicTacToe
       @board[4][1] = 'X'
     elsif input == 9 && @board[4][2] == '9'
       @board[4][2] = 'X'
-    else puts @invalid_input = "Position not available, please put your marker somewhere else"
+    else puts @invalid_input = "Position not available, please place your marker"
     end
   end 
 
@@ -113,7 +123,7 @@ class TicTacToe
       @board[4][1] = 'O'
     elsif input == 9 && @board[4][2] == '9'
       @board[4][2] = 'O'
-    else puts @invalid_input = "Position not available, please put your marker somewhere else"
+    else puts @invalid_input = "Position not available, please place your marker"
     end
   end
 
@@ -148,6 +158,13 @@ class TicTacToe
       return @winner = true if @board[0][0] == 'O'
     end 
   end
+
+  def draw?
+    @board.all? do |rows|
+      rows.all? {|i| i == "X" || i == "O" || i =="----------"}
+    end
+  end
+
 end
 
 puts TicTacToe.welcome_message
