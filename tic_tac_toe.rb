@@ -62,7 +62,7 @@ class TicTacToe
     
     loop do
       input = gets.chomp.to_i
-      if input.between?(1, 8)
+      if input.between?(1, 9)
         return input
       else
         puts 'Position not available, please place your marker'
@@ -172,5 +172,5 @@ class TicTacToe
   end
 end
 
-game = TicTacToe.new
-game.play
+# game = TicTacToe.new
+# game.play
