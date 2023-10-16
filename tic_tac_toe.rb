@@ -1,5 +1,4 @@
 class TicTacToe
-
   def initialize
     # Game state variables
     @player1 = nil
@@ -15,33 +14,35 @@ class TicTacToe
 
   # Looping Script method
   def play
-    get_names()
-    display_board()
+    get_names
+    display_board
 
     loop do
-      # Player 1 logic 
-      player_input = player_1_input()
+      # Player 1 logic
+      player_input = player_1_input
       player_1_marker(player_input)
-      display_board()
-      if winner?()
+      display_board
+      if winner?
         puts "Congratulations #{@player1} won!"
         return
       end
-      if draw?()
+      if draw?
         puts 'It a draw!'
         return
       end
 
       # Player 2 game logic
-      second_input = player_2_input()
+      second_input = player_2_input
       player_2_marker(second_input)
-      display_board()
-      if winner?()
+      display_board
+      if winner?
         puts "Congratulations #{@player2} won!"
         return
       end
     end
   end
+
+  private
 
   def get_names
     puts 'Welcome to Tic Tac Toe!'
@@ -49,7 +50,7 @@ class TicTacToe
     @player1 = gets.chomp
     puts 'Player 2 what is your name?'
     @player2 = gets.chomp
-  end 
+  end
 
   def display_board
     @board.each do |row|
@@ -59,14 +60,12 @@ class TicTacToe
 
   def player_1_input
     p "Player 1: #{@player1}, where do you want to put your marker? (Enter a number)"
-    
+
     loop do
       input = gets.chomp.to_i
-      if input.between?(1, 9)
-        return input
-      else
-        puts 'Position not available, please place your marker'
-      end
+      return input if input.between?(1, 9)
+
+      puts 'Position not available, please place your marker'
     end
 
     input
@@ -96,14 +95,12 @@ class TicTacToe
 
   def player_2_input
     p "Player 2: #{@player2}, where do you want to put your marker? (Enter a number)"
-    
+
     loop do
       input = gets.chomp.to_i
-      if input.between?(1, 8)
-        return input
-      else
-        puts 'Position not available, please place your marker'
-      end
+      return input if input.between?(1, 8)
+
+      puts 'Position not available, please place your marker'
     end
     input
   end
@@ -129,7 +126,6 @@ class TicTacToe
       @board[4][2] = 'O'
     end
   end
-
 
   def winner?
     # Across
@@ -172,5 +168,17 @@ class TicTacToe
   end
 end
 
-# game = TicTacToe.new
-# game.play
+game = TicTacToe.new
+game.play
+
+# board[0][0], board[0][1], board[0][2] = 'X', 'X', 'X'
+
+# board[3][0], board[3][1], board[3][2] = 'O', 'O', 'O'
+
+# board[0][0], board[2][0], board[4][0] = 'X', 'X', 'X'
+
+# board[0][0], board[2][1], board[4][2] = 'O', 'O', 'O'
+
+# board[0][0], board[0][1], board[0][2] = 'O', 'X', 'O'
+# board[2][0], board[2][1], board[2][2] = 'O', 'X', 'X'
+# board[4][0], board[4][1], board[4][2] = 'X', 'O', 'X'
