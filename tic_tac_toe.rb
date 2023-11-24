@@ -98,7 +98,7 @@ class TicTacToe
 
     loop do
       input = gets.chomp.to_i
-      return input if input.between?(1, 8)
+      return input if input.between?(1, 9)
 
       puts 'Position not available, please place your marker'
     end
@@ -170,15 +170,3 @@ end
 
 game = TicTacToe.new
 game.play
-
-# board[0][0], board[0][1], board[0][2] = 'X', 'X', 'X'
-
-# board[3][0], board[3][1], board[3][2] = 'O', 'O', 'O'
-
-# board[0][0], board[2][0], board[4][0] = 'X', 'X', 'X'
-
-# board[0][0], board[2][1], board[4][2] = 'O', 'O', 'O'
-
-# board[0][0], board[0][1], board[0][2] = 'O', 'X', 'O'
-# board[2][0], board[2][1], board[2][2] = 'O', 'X', 'X'
-# board[4][0], board[4][1], board[4][2] = 'X', 'O', 'X'
